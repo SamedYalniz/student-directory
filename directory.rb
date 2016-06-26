@@ -36,7 +36,18 @@ def print_specific_letter(students)
 			puts "#{student[:name]}"
 		end 
 	end 
+	puts ""
 end  
+
+def print_short(students)
+	puts "Printing students with names shorter than 12 chars"
+	students.each do |student|
+		if student[:name].length < 12
+			puts "#{student[:name]}"
+
+		end 
+	end 
+end 
 
 
 
@@ -45,6 +56,7 @@ print_header
 print(students)
 print_footer(students)
 print_specific_letter(students)
+print_short(students)
 
 
 
