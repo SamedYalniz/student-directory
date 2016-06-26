@@ -1,19 +1,3 @@
-
-studentss = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},  
-  {name: "Norman Bates", cohort: :november}
-]
-
-
 def print_header 
 puts "The students of villains Academy"
 puts "--------------"
@@ -22,7 +6,7 @@ end
 def print(students)
 	students.each_with_index do |student,index|
 		no = index+1 
-		puts "#{no}.#{student[:name]} (#{student[:cohort]} cohort"
+		puts "#{no}.#{student[:name]} #{student[:cohort]} cohort"
 	end 
 end 
 
@@ -44,7 +28,23 @@ def input_students
 end 
 
 students = input_students
+def print_specific_letter(students)
+	puts "Please enter a specific letter to print out all names starting with it"
+	letter = gets.chomp
+	students.each do |student|
+		if student[:name].chr == letter
+			puts "#{student[:name]}"
+		end 
+	end 
+end 
+
+
+
+
 print_header
 print(students)
 print_footer(students)
+print_specific_letter(students)
+
+
 
