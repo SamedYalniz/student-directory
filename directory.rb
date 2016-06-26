@@ -49,11 +49,20 @@ def print_short(students)
 	end 
 end 
 
+def print_with_loop (students)
+	counter = 0
+	while counter != students.length
+		 puts "#{(students[counter])[:name]} #{(students[counter])[:cohort] cohort}"
+		 counter +=1 
+	end 
+end 
+
+
 
 
 
 print_header
-print(students)
+print_with_loop(students)
 print_footer(students)
 print_specific_letter(students)
 print_short(students)
