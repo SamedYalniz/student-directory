@@ -32,11 +32,11 @@ def print_specific_letter(students)
 	puts "Please enter a specific letter to print out all names starting with it"
 	letter = gets.chomp
 	students.each do |student|
-		if student[:name].chr == letter
+		if student[:name].downcase.chr == letter
 			puts "#{student[:name]}"
 		end 
 	end 
-end 
+end  
 
 
 
