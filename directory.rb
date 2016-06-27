@@ -22,41 +22,41 @@ end
 def input_students 
 	puts "Please enter the names of the students".center(50)
 	puts "To finish, just hit return twice".center(50)
-	name = gets.chomp
+	name = STDIN.gets.chomp
 		if name.empty?
 			puts "Please enter a name!"
-			name = gets.chomp
+			name = STDIN.gets.chomp
 		end 
 	puts "Please enter the cohort".center(50)
-	month = gets.chomp.to_sym
+	month = STDIN.gets.chomp.to_sym
 	puts "Please enter students hobbies".center(50)
-	hobbies = gets.chomp
+	hobbies = STDIN.gets.chomp
 	puts "Please enter the country of birth of the student".center(50)
-	country = gets.chomp
+	country = STDIN.gets.chomp
 	puts "Please enter the students' height".center(50)
-	height = gets.chomp
+	height = STDIN.gets.chomp
 	puts "Do you want to recheck your answer? (y for yes and everything else for no)"
-	answer = gets.chomp
+	answer = STDIN.gets.chomp
 	if answer == "y"
 		puts "Please enter the names of more students".center(50)
 		puts "To finish, just hit return twice".center(50)
-		name = gets.chomp
+		name = STDIN.gets.chomp
 		if name.empty? 
 			puts "Please enter a name!"
-			name = gets.chomp
+			name = STDIN.gets.chomp
 		end 
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
-			month = gets.chomp.to_sym
+			month = STDIN.gets.chomp.to_sym
 			if month.empty? 
 				month = "November".to_sym
 			end 
 			puts "Please enter students hobbies".center(50)
-			hobbies = gets.chomp
+			hobbies = STDIN.gets.chomp
 			puts "Please enter the country of birth of the student".center(50)				
-			country = gets.chomp
+			country = STDIN.gets.chomp
 			puts "Please enter the students' height".center(50)
-			height = gets.chomp
+			height = STDIN.gets.chomp
 		end 
 	end
 	while !name.empty? do 
@@ -68,37 +68,37 @@ def input_students
 		end 
 		puts "Please enter the names of more students".center(50)
 		puts "To finish, just hit return twice".center(50)
-		name = gets.chomp
+		name = STDIN.gets.chomp
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
-			month = gets.chomp.to_sym
+			month = STDIN.gets.chomp.to_sym
 			if month.empty? 
 				month = "November".to_sym
 			end 
 			puts "Please enter students hobbies".center(50)
-			hobbies = gets.chomp
+			hobbies = STDIN.gets.chomp
 			puts "Please enter the country of birth of the student".center(50)				
-			country = gets.chomp
+			country = STDIN.gets.chomp
 			puts "Please enter the students' height".center(50)
-			height = gets.chomp
+			height = STDIN.gets.chomp
 			puts "Do you want to recheck the students details? (y for yes, everything else for no)".center(50)
-			answer = gets.chomp				
+			answer = STDIN.gets.chomp				
 			if answer == "y"
 				puts "Please enter the names of more students".center(50)
 				puts "To finish, just hit return twice".center(50)
-				name = gets.chomp
+				name = STDIN.gets.chomp
 				if !name.empty? 
 					puts "Please enter the cohort".center(50)
-					month = gets.chomp
+					month = STDIN.gets.chomp
 					if month.empty? 
 						month = "November"
 					end 
 					puts "Please enter students hobbies".center(50)
-					hobbies = gets.chomp
+					hobbies = STDIN.gets.chomp
 					puts "Please enter the country of birth of the student".center(50)				
-					country = gets.chomp
+					country = STDIN.gets.chomp
 					puts "Please enter the students' height".center(50)
-					height = gets.chomp
+					height = STDIN.gets.chomp
 				end 
 			end 
 		end 
@@ -108,7 +108,7 @@ end
 
 def print_specific_letter
 	puts "Please enter a specific letter to print out all names starting with it".center(20)
-	letter = gets.chomp
+	letter = STDIN.gets.chomp
 	@students.each do |student|
 		if @student[:name].downcase.chr == letter
 			puts "#{@student[:name]}".center(50)
@@ -155,7 +155,7 @@ end
 def interactive_menu
 	loop do 
 		print_menu
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end 
 end 
 def print_menu 
@@ -197,8 +197,8 @@ def save_students
 	file.close#
 	puts "File saved!".center(50)
 end 
-def load_students
-	file = File.open("students.csv","r")
+def load_students (filename = "students.csv")
+	file = File.open(filename,"r")
 	file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
 		@students << {name: name, cohort: cohort.to_sym}
@@ -206,7 +206,19 @@ def load_students
 	file.close
 	puts "File loaded!".center(50)
 end 
+def try_load_students
+	filename = ARGV.first
+	return if filename.nil?
+	if File.exists?(filename)
+		load_students(filename)
+		puts "Loaded #{@students.count} from #{filename}"
+	else 
+		puts "Sorry, #{filename} doesn't exist."
+		exit 
+	end 
+end 
 
+try_load_students
 interactive_menu
 
 
