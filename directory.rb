@@ -23,6 +23,10 @@ def input_students
 	puts "To finish, just hit return twice".center(50)
 	students = []
 	name = gets.chomp
+		if name.empty?
+			puts "Please enter a name!"
+			name = gets.chomp
+		end 
 	puts "Please enter the cohort".center(50)
 	month = gets.chomp.to_sym
 	puts "Please enter students hobbies".center(50)
@@ -37,6 +41,10 @@ def input_students
 		puts "Please enter the names of more students".center(50)
 		puts "To finish, just hit return twice".center(50)
 		name = gets.chomp
+		if name.empty? 
+			puts "Please enter a name!"
+			name = gets.chomp
+		end 
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
 			month = gets.chomp.to_sym
