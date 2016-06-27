@@ -155,26 +155,38 @@ def print_sorted_by_cohorts(students)
 	end 
 end 
 
+def interactive_menu
+	students = []
+	loop do 
+		#1. print the menu and ask the user what to do
+		puts "1. Input the students"
+		puts "2. Show the students"
+		puts "9. Exit" # 9 because we'll be adding more items
+
+		#2. read the input and save it into a variable
+		selection = gets.chomp
+
+		#3.do what the user has asked
+		case selection 
+		when "1"
+			students = input_students
+		when "2"
+			print_header
+			print(students)
+			print_footer(students) 
+		when "9"
+			exit #this will cause the program to terminate 
+		else 
+			puts " What do you mean bro? Try again!"
+		end 
+	end 
+end 
 
 
 
 
+interactive_menu
 
-
-
-
-
-
-
-
-
-
-print_header
-print(students)
-print_sorted_by_cohort(students)
-print_footer(students)
-print_specific_letter(students)
-print_short(students)
 
 
 
