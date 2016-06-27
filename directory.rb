@@ -186,22 +186,37 @@ def process (selection)
 	end 
 end 
 def save_students
-	# open the file for writing 
-	file = File.open("students.csv" , "w")
-	#iterate over the arrayy of students
-	@students.each do |student|
-		student_data = [student[:name], student[:cohort]]
-		csv_line = student_data.join(",")
-		file.puts csv_line
+	puts "To which file do you want to save the students?"
+	filename = STDIN.gets.chomp
+	if File.exists?(filename)
+		# open the file for writing 
+		file = File.open(filename , "w")
+		#iterate over the arrayy of students
+		@students.each do |student|
+			student_data = [student[:name], student[:cohort]]
+			csv_line = student_data.join(",")
+			file.puts csv_line
+		end 
+	else 
+		puts "File does not exist try another"
+		save_students
 	end 
 	file.close#
 	puts "File saved!".center(50)
 end 
 def load_students (filename = "students.csv")
-	file = File.open(filename,"r")
-	file.readlines.each do |line|
-		name, cohort = line.chomp.split(',')
-		@students << {name: name, cohort: cohort.to_sym}
+	puts "Which file do you want to load?"
+	filename = STDIN.gets.chomp
+	if File.exists?(filename)
+		file = File.open(filename,"r")
+		file.readlines.each do |line|
+			name, cohort = line.chomp.split(',')
+			@students << {name: name, cohort: cohort.to_sym}
+		end 
+	else 
+		puts "Filename does not exist"
+		puts "Please try again"
+		load_students
 	end 
 	file.close
 	puts "File loaded!".center(50)
@@ -213,10 +228,15 @@ def try_load_students
 		load_students(filename)
 		puts "Loaded #{@students.count} from #{filename}"
 	else 
-		puts "Sorry, #{filename} doesn't exist."
-		exit 
+		load_students(student.csv)
+		puts "Loaded #{@students.count} from #{filename}"
 	end 
 end 
+
+def add_students_to_array(name, cohort)
+	@students << {name: name, cohort: cohort.to_sym}
+end 
+
 
 try_load_students
 interactive_menu
