@@ -17,6 +17,60 @@ def print_footer(names)
 		puts "Overall, we have #{names.count} great students".center(50)
 	end 
 end 
+def getting_name	
+	puts "Please enter the name of the student"
+	name = gets.chomp
+	name
+end
+def getting_month
+	puts "Please enter the cohort"
+	month = gets.chomp
+	month
+end 
+def getting_hobbies
+	puts "Please enter students' hobbies"
+	hobbies = gets.chomp
+	hobbies
+end 
+def getting_country
+	puts "Please enter students' birth country"
+	country = gets.chomp
+	country
+end
+def getting_height
+	puts "Please enter students height"
+	height = gets.chomp
+	height
+end 
+def getting_details
+	getting_name
+	getting_month
+	getting_hobbies
+	getting_country
+	getting_height
+end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def input_students 
 	puts "Please enter the names of the students".center(50)
@@ -31,6 +85,26 @@ def input_students
 	country = gets.chomp
 	puts "Please enter the students' height".center(50)
 	height = gets.chomp
+	puts "Do you want to recheck your answer? (y for yes and everything else for no)"
+	answer = gets.chomp
+	if answer == "y"
+		puts "Please enter the names of more students".center(50)
+		puts "To finish, just hit return twice".center(50)
+		name = gets.chomp
+		if !name.empty? 
+			puts "Please enter the cohort".center(50)
+			month = gets.chomp
+			if month.empty? 
+				month = "November"
+			end 
+			puts "Please enter students hobbies".center(50)
+			hobbies = gets.chomp
+			puts "Please enter the country of birth of the student".center(50)				
+			country = gets.chomp
+			puts "Please enter the students' height".center(50)
+			height = gets.chomp
+		end 
+	end
 	while !name.empty? do 
 
 		students << {name: name, cohort: month, hobbies: hobbies, country: country, height: height}
@@ -45,16 +119,39 @@ def input_students
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
 			month = gets.chomp
+			if month.empty? 
+				month = "November"
+			end 
 			puts "Please enter students hobbies".center(50)
 			hobbies = gets.chomp
-			puts "Please enter the country of birth of the student".center(50)
+			puts "Please enter the country of birth of the student".center(50)				
 			country = gets.chomp
 			puts "Please enter the students' height".center(50)
 			height = gets.chomp
+			puts "Do you want to recheck the students details? (y for yes, everything else for no)".center(50)
+			answer = gets.chomp				
+			if answer == "y"
+				puts "Please enter the names of more students".center(50)
+				puts "To finish, just hit return twice".center(50)
+				name = gets.chomp
+				if !name.empty? 
+					puts "Please enter the cohort".center(50)
+					month = gets.chomp
+					if month.empty? 
+						month = "November"
+					end 
+					puts "Please enter students hobbies".center(50)
+					hobbies = gets.chomp
+					puts "Please enter the country of birth of the student".center(50)				
+					country = gets.chomp
+					puts "Please enter the students' height".center(50)
+					height = gets.chomp
+				end 
+			end 
 		end 
+		
 	end 
 	students 
-
 end 
 
 students = input_students
@@ -86,7 +183,6 @@ def print_with_loop (students)
 		 counter +=1 
 	end 
 end 
-
 
 
 
