@@ -1,7 +1,7 @@
 @students = [] #empty array accessible to all methods 
 def print_header 
-puts "The students of villains Academy".center(50)
-puts "--------------".center(50)
+	puts "The students of villains Academy".center(50)
+	puts "--------------".center(50)
 end 
 
 def print_students_list
@@ -162,6 +162,7 @@ def print_menu
 	puts "1. Input the students"
 	puts "2. Show the students"
 	puts "3. Save the list to students.csv"
+	puts "4. Load the list from students.csv"
 	puts "9. Exit" 
 end 
 def show_students 
@@ -177,6 +178,8 @@ def process (selection)
 		show_students
 	when "3"
 		save_students
+	when "4"
+		load_students
 	when "9"
 		exit 
 	else puts "What do you mean bro? Try again!"
@@ -192,7 +195,16 @@ def save_students
 		file.puts csv_line
 	end 
 	file.close#
-	puts "File saved"
+	puts "File saved!".center(50)
+end 
+def load_students
+	file = File.open("students.csv","r")
+	file.readlines.each do |line|
+		name, cohort = line.chomp.split(',')
+		@students << {name: name, cohort: cohort.to_sym}
+	end 
+	file.close
+	puts "File loaded!".center(50)
 end 
 
 interactive_menu
