@@ -17,60 +17,6 @@ def print_footer(names)
 		puts "Overall, we have #{names.count} great students".center(50)
 	end 
 end 
-def getting_name	
-	puts "Please enter the name of the student"
-	name = gets.chomp
-	name
-end
-def getting_month
-	puts "Please enter the cohort"
-	month = gets.chomp
-	month
-end 
-def getting_hobbies
-	puts "Please enter students' hobbies"
-	hobbies = gets.chomp
-	hobbies
-end 
-def getting_country
-	puts "Please enter students' birth country"
-	country = gets.chomp
-	country
-end
-def getting_height
-	puts "Please enter students height"
-	height = gets.chomp
-	height
-end 
-def getting_details
-	getting_name
-	getting_month
-	getting_hobbies
-	getting_country
-	getting_height
-end 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def input_students 
 	puts "Please enter the names of the students".center(50)
@@ -78,7 +24,7 @@ def input_students
 	students = []
 	name = gets.chomp
 	puts "Please enter the cohort".center(50)
-	month = gets.chomp
+	month = gets.chomp.to_sym
 	puts "Please enter students hobbies".center(50)
 	hobbies = gets.chomp
 	puts "Please enter the country of birth of the student".center(50)
@@ -93,9 +39,9 @@ def input_students
 		name = gets.chomp
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
-			month = gets.chomp
+			month = gets.chomp.to_sym
 			if month.empty? 
-				month = "November"
+				month = "November".to_sym
 			end 
 			puts "Please enter students hobbies".center(50)
 			hobbies = gets.chomp
@@ -118,9 +64,9 @@ def input_students
 		name = gets.chomp
 		if !name.empty? 
 			puts "Please enter the cohort".center(50)
-			month = gets.chomp
+			month = gets.chomp.to_sym
 			if month.empty? 
-				month = "November"
+				month = "November".to_sym
 			end 
 			puts "Please enter students hobbies".center(50)
 			hobbies = gets.chomp
@@ -184,11 +130,40 @@ def print_with_loop (students)
 	end 
 end 
 
+def print_sorted_by_cohort(students)
+	puts "Which cohort do you want to see?"
+	month = STDIN.gets.chomp.capitalize.to_sym
+	selection = []
+	selection << students.map{|student| student[:name] if student[:cohort] == month}
+	puts "Cohort: #{month}"
+	puts "Students: #{selection.flatten.join("; ")}"
+end 
+
+def print_sorted_by_cohorts(students)
+	students.sort_by {|student| student[:cohort]}
+	students.each_with_index do |student,index|
+		no = index+1 
+		puts "#{no}.#{student[:name]} #{student[:cohort]} cohort"
+	end 
+end 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 print_header
-print_with_loop(students)
+print(students)
+print_sorted_by_cohort(students)
 print_footer(students)
 print_specific_letter(students)
 print_short(students)
