@@ -1,3 +1,4 @@
+require 'csv' 
 @students = [] #empty array accessible to all methods 
 def print_header 
 	puts "The students of villains Academy".center(50)
@@ -190,36 +191,37 @@ def save_students
 	filename = STDIN.gets.chomp
 	if File.exists?(filename)
 		# open the file for writing 
-		file = File.open(filename , "w")
-		#iterate over the arrayy of students
-		@students.each do |student|
-			student_data = [student[:name], student[:cohort]]
-			csv_line = student_data.join(",")
-			file.puts csv_line
+		CSV.open(filename , "w") do |csv|
+
+			#iterate over the arrayy of students
+			@students.each do |student|
+				student_data = [student[:name], student[:cohort]]
+				csv_line = student_data.join(",")
+				csv.puts csv_line
+			end 
+			puts "File saved!".center(50)
 		end 
 	else 
 		puts "File does not exist try another"
 		save_students
 	end 
-	file.close#
-	puts "File saved!".center(50)
 end 
 def load_students (filename = "students.csv")
 	puts "Which file do you want to load?"
 	filename = STDIN.gets.chomp
 	if File.exists?(filename)
-		file = File.open(filename,"r")
-		file.readlines.each do |line|
-			name, cohort = line.chomp.split(',')
-			@students << {name: name, cohort: cohort.to_sym}
+		CSV.open(filename,"r") do |csv| 
+			csv.readlines.each do |line|
+				name, cohort = line.chomp.split(',')
+				@students << {name: name, cohort: cohort.to_sym}
+			end 
+			puts "File Loaded!".center(50)
 		end 
 	else 
 		puts "Filename does not exist"
 		puts "Please try again"
 		load_students
 	end 
-	file.close
-	puts "File loaded!".center(50)
 end 
 def try_load_students
 	filename = ARGV.first
